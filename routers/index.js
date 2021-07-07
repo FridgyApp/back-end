@@ -5,7 +5,7 @@ const routerShopping = require('./shoppingList.router')
 const CategoryRouter = require('./category.router')
 
 router
-  .use('/home',routerShopping)
+  .use('/shoppingList',routerShopping)
   .use('/products', routerProduct)
   .use('/category', CategoryRouter)
 

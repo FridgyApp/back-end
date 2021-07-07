@@ -12,6 +12,17 @@ const createProduct = async(req, res = response) => {
   }
 }
 
+const getProducts  = async (req, res) =>{
+  try{
+    const getAllProducts = await ProductModel.find()
+    res.json(getAllProducts)
+  } catch (error){
+    console.log('Error', error)
+  }
+}
+
 module.exports = {
-  createProduct
+  createProduct,
+  getProducts
+  
 }
