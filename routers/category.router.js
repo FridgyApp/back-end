@@ -1,7 +1,9 @@
 const CategoryRouter = require('express').Router()
 
-const { createCategory } = require('../controllers/category.controller')
+const { 
+  getAllCategories
+ } = require('../controllers/category.controller')
 
-CategoryRouter.post('/', createCategory)
+CategoryRouter.get('/', getAllCategories)
 
 module.exports = CategoryRouter 

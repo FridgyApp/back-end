@@ -6,8 +6,8 @@ const {
 } = require('../controllers/product.controller')
 
 routerProduct 
-  .post('/',  createProduct)
-  .get('/', getProducts)
+.get('/', getProducts)
+.post('/', createProduct)
 
 
 module.exports = routerProduct 

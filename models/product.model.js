@@ -3,7 +3,10 @@ const mongoose = require('mongoose')
 
 const ProductSchema = new mongoose.Schema({
   name: String,
-  category: String,
+  category: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'category'
+  },
   groupId: String
 })
 
