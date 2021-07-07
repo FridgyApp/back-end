@@ -1,7 +1,14 @@
 const routerShopping = require('express').Router()
 
-const { createShopping } = require('../controllers/shoppingList.controller')
+const { 
+  createShopping,
+  getShoppingList,
+  addProductToList
+} = require('../controllers/shoppingList.controller')
 
-routerShopping .post('/',  createShopping)
 
+routerShopping 
+  .get('/', getShoppingList)
+  .post('/createShoppingList', createShopping)
+  .post('/addProduct', addProductToList)
 module.exports = routerShopping 
