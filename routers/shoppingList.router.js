@@ -2,10 +2,13 @@ const routerShopping = require('express').Router()
 
 const { 
   createShopping,
-  getShoppingList
+  getShoppingList,
+  addProductToList
 } = require('../controllers/shoppingList.controller')
 
+
 routerShopping 
-  .post('/',  createShopping)
   .get('/', getShoppingList)
+  .post('/createShoppingList', createShopping)
+  .post('/addProduct', addProductToList)
 module.exports = routerShopping 

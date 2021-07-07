@@ -15,7 +15,7 @@ api
   .listen(process.env.PORT , () => {
   console.log('Encendido')
   mongoose
-  .connect(process.env.MONGO_URL,
+  .connect(process.env.MONGO_URL_LOCAL,
     {
       dbName: process.env.MONGO_DB,
       useNewUrlParser: true,
