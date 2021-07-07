@@ -23,11 +23,10 @@ const getShoppingList = async (req, res) => {
 
 const addProductToList = async (req, res ) => {
   try{
-    const pushProductToShoppigList = await ShoppingModel.findById('60e57f6a7435c4c3713e146f')
-    console.log(req.body)
-    pushProductToShoppigList.products.push(req.body)
-    pushProductToShoppigList.save()
-    res.status(200).json(pushProductToShoppigList)
+    const shoppingList = await ShoppingModel.findById('60e57f6a7435c4c3713e146f')
+    shoppingList.products.push(req.body)
+    await shoppingList.save()
+    res.status(200).json(shoppingList)
   }catch (error) {
     console.log('Error', error)
     res.status(400).json({message: 'Error, cannot find'})
