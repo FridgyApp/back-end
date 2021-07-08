@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 const createShopping = async(req, res = response ) => {
   try {
     const createList = await ShoppingModel.create()
-  createList.save() 
+    await createList.save() 
   res.json(createList)
   } catch (error) {
   console.log('Error', error)
@@ -22,7 +22,7 @@ const getShoppingList = async (req, res) => {
   }
 }
 
-const addProductToList = async (req, res ) => {
+const addProductToList = async ( req , res) => {
   const { productId } = req.body
   req.body.product = mongoose.Types.ObjectId(productId)
   try{
@@ -35,9 +35,18 @@ const addProductToList = async (req, res ) => {
     res.status(400).json({message: 'Error, cannot find'})
   }
 }
+ 
+// const changeStatus = async (req , res ) => {
+//   console.log(req.body)
+//   try {
+
+//   }
+// }
+
 
 module.exports = {
   createShopping,
   getShoppingList,
-  addProductToList
+  addProductToList,
+  //changeStatus
 }
