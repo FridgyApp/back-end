@@ -28,7 +28,7 @@ const addProductToList = async (req, res) => {
   try {
     const shoppingList = await ShoppingModel.findById(
       "60e57f6a7435c4c3713e146f"
-    );
+    ).populate('products.product');
     shoppingList.products.push(req.body);
     await shoppingList.save();
     res.status(200).json(shoppingList);
@@ -40,7 +40,7 @@ const addProductToList = async (req, res) => {
 
 const changeStatus = async (req, res) => {
   try {
-    const list = await ShoppingModel.findById("60e57f6a7435c4c3713e146f");
+    const list = await ShoppingModel.findById("60e57f6a7435c4c3713e146f").populate('products.product');
     list.products.forEach((product) => {
       if (product._id == req.body.id) {
         product.bought = !product.bought;
