@@ -1,3 +1,6 @@
+![FridgyApp-Logo](https://user-images.githubusercontent.com/83118705/124954385-e79db080-e00d-11eb-96d1-9e92be838144.jpg)
+
+
 # Fridgy App
 Fridgy App is an API that serves as a time-management application. 
 # Installation
