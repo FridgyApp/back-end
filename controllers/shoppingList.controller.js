@@ -31,9 +31,8 @@ const addProductToList = async (req, res) => {
       "60e57f6a7435c4c3713e146f"
     ).populate('products.product');
     shoppingList.products.push(req.body);
-
     await shoppingList.save();
-    res.status(200).json(shoppingList);
+    getShoppingList()
   } catch (error) {
     console.log("Error", error);
     res.status(400).json({ message: "Error, cannot find" });
