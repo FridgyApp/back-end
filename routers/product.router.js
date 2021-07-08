@@ -2,7 +2,7 @@ const routerProduct = require('express').Router()
 
 const { 
   createProduct,
-  getProducts 
+  getProducts
 } = require('../controllers/product.controller')
 
 routerProduct 
