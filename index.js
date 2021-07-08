@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 
 const router = require('./routers/index')
 const api = express()
-
+console.log(process.env.MONGO_URL_PROD)
 api
   .use(cors())
   .use(morgan('dev'))
