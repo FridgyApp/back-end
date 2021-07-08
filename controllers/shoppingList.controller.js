@@ -36,17 +36,26 @@ const addProductToList = async ( req , res) => {
   }
 }
  
-// const changeStatus = async (req , res ) => {
-//   console.log(req.body)
-//   try {
-
-//   }
-// }
-
-
+const changeStatus = async (req , res ) => {
+  
+  try {
+    const list = await ShoppingModel.findById('60e57f6a7435c4c3713e146f')
+    list.products.forEach(product=>{
+      if(product._id == req.body.id) {
+        product.bought = !product.bought
+        product.notes = ""
+      }
+    })
+    list.save()
+    res.status(200).json(list)
+  } catch (error) {
+    console.log(error)
+  }
+ 
+}
 module.exports = {
   createShopping,
   getShoppingList,
   addProductToList,
-  //changeStatus
+  changeStatus
 }

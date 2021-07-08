@@ -4,7 +4,7 @@ const {
   createShopping,
   getShoppingList,
   addProductToList,
-  //changeStatus
+  changeStatus
 } = require('../controllers/shoppingList.controller')
 
 
@@ -12,6 +12,6 @@ routerShopping
   .get('/', getShoppingList)
   .post('/createShoppingList', createShopping)
   .post('/addProduct', addProductToList)
-  //.put('/changeStatus', changeStatus )
+  .put('/changeStatus', changeStatus )
 
 module.exports = routerShopping 
