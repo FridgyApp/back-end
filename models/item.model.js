@@ -1,7 +1,11 @@
 const mongoose = require ('mongoose')
 
 const itemSchema = new mongoose.Schema({
-  quantity : Number,
+  product: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'product'
+  },
+  notes : String,
   bought: Boolean
 })
 

@@ -1,6 +1,7 @@
 const {request , response } = require('express')
 
-const ShoppingModel = require ('../models/shoppingList.model')
+const ShoppingModel = require('../models/shoppingList.model')
+const mongoose = require('mongoose')
 
 const createShopping = async(req, res = response ) => {
   try {
@@ -22,6 +23,8 @@ const getShoppingList = async (req, res) => {
 }
 
 const addProductToList = async (req, res ) => {
+  const { productId } = req.body
+  req.body.product = mongoose.Types.ObjectId(productId)
   try{
     const shoppingList = await ShoppingModel.findById('60e57f6a7435c4c3713e146f')
     shoppingList.products.push(req.body)
