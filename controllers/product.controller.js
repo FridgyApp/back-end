@@ -21,6 +21,7 @@ const createProduct = async (req, res = response) => {
     req.body.bought = false;
 
     ShoppingListController.addProductToList(req, res);
+    
   } catch (error) {
     console.log("Error", error);
   }
