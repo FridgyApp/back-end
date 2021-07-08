@@ -5,4 +5,4 @@ const ShoppingSchema = new mongoose.Schema({
   products: [itemSchema]
 })
 
-module.exports = mongoose.model('shoppinglists', ShoppingSchema)
+module.exports = mongoose.model('shoppinglist', ShoppingSchema)

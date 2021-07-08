@@ -16,6 +16,7 @@ const createShopping = async (req, res = response) => {
 const getShoppingList = async (req, res) => {
   try {
     const getAllShoppingList = await ShoppingModel.find();
+    console.log(getAllShoppingList)
     res.json(getAllShoppingList);
   } catch (error) {
     console.log("Error", error);
