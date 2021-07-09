@@ -24,6 +24,7 @@ const getShoppingList = async (req, res) => {
 
 const addProductToList = async (req, res) => {
   const { productId } = req.body;
+  console.log(productId)
   req.body.product = mongoose.Types.ObjectId(productId);
   req.body.bought = false
   try {
@@ -32,7 +33,7 @@ const addProductToList = async (req, res) => {
     ).populate('products.product');
     shoppingList.products.push(req.body);
     await shoppingList.save();
-    getShoppingList()
+    await getShoppingList(req, res)
   } catch (error) {
     console.log("Error", error);
     res.status(400).json({ message: "Error, cannot find" });
