@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const ProductModel = require("../models/product.model");
 const CategoryModel = require("../models/category.model");
-const ShoppingListController = require("../controllers/shoppingList.controller");
+// const ShoppingListController = require("./falseShopping");
 
 const createProduct = async (req, res = response) => {
   req.body.category = mongoose.Types.ObjectId("60e587407435c4c3713e1483");

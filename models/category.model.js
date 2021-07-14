@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const CategorySchema = new mongoose.Schema({
-  name : String,
+  name: String,
   products: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'product'

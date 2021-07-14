@@ -6,7 +6,7 @@ const mongoose = require('mongoose')
 
 const router = require('./routers/index')
 const api = express()
-console.log(process.env.MONGO_URL_PROD)
+console.log(process.env.MONGO_URL_LOCAL)
 api
   .use(cors())
   .use(morgan('dev'))
@@ -15,7 +15,7 @@ api
   .listen(process.env.PORT , () => {
   console.log('Encendido')
   mongoose
-  .connect(process.env.MONGO_URL_PROD,
+  .connect(process.env.MONGO_URL_LOCAL,
     {
       dbName: process.env.MONGO_DB,
       useNewUrlParser: true,
