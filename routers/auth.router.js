@@ -4,7 +4,7 @@ const { check } = require('express-validator')
 const { isEmail } = require('../database/validators-db')
 const validateBody = require('../middlewares/validateBody')
 
-const { signup, login } = require('../controllers/auth.controller')
+const { signup, login, googleSignIn } = require('../controllers/auth.controller')
 
 AuthRouter.post('/signup',
   [
