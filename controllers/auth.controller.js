@@ -2,6 +2,7 @@ const { response } = require('express')
 const UserModel = require('../models/auth.model')
 const bcrypt = require('bcrypt')
 const createJwt = require('../helpers/JWT')
+const {googleVerify} = require('../helpers/google-verify')
 
 const signup = async (req, res=response) =>{
   const { password } = req.body
@@ -43,12 +44,46 @@ const login = async(req, res=response) =>{
   }
 }
 
-const googleSignIn = (req, res = response) => {
+const googleSignIn = async(req, res = response) => {
+  
   const {id_token} = req.body
-res.json({
-  msg: 'Todo ok google sign in ! ',
-  id_token
-});
+  
+  try{
+    const {name, photo, email} = await googleVerify( id_token );
+
+    let user = await UserModel.findOne({ email });
+
+    if( !user) {
+      //create user
+      const data = {
+        name, 
+        email,
+        password: '',
+        photo,
+        google: true
+      };
+
+      user = new UserModel (data);
+      await user.save();
+    }
+
+    // create JWT
+    const token = await createJwt(user._id)
+    res.status(200).json({
+      user,
+      token
+    })
+
+
+    res.json({
+      msg: 'Todo ok google sign in ! ',
+      googleUser
+    });
+  }catch (error){
+    res.status(400).json({
+      msg: 'Token is not valid'
+    })
+  }
 
 }
 
