@@ -8,20 +8,20 @@ const { signup, login } = require('../controllers/auth.controller')
 
 authRouter.post('/signup',
   [
-    check('name','El nombre es obligatorio').not().isEmpty(),
-    check('email','Tiene que ser un email valido').isEmail(),
+    check('name', 'El nombre es obligatorio').not().isEmpty(),
+    check('email', 'Tiene que ser un email valido').isEmail(),
     check('email').custom(isEmail),
-    check('password').not().isEmpty().isLength({min:6}),
+    check('password').not().isEmpty().isLength({ min: 6 }),
     validateBody,
   ]
-  ,signup)
+  , signup)
 
 authRouter.post('/login',
   [
     check('email', 'Usuario o contraseña son invalido').isEmail(),
-    check('password', 'Usuario o contraseña son invalido').isLength({min:6}),
+    check('password', 'Usuario o contraseña son invalido').isLength({ min: 6 }),
     validateBody
-  ] 
-,login)
+  ]
+  , login)
 
 module.exports = authRouter
