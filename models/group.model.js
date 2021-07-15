@@ -10,7 +10,10 @@ const shoppingItemSchema = new mongoose.Schema({
 })
 
 const groupSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true
+  },
   members: [
     {
       type: mongoose.Schema.Types.ObjectId,
