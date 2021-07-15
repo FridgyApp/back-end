@@ -1,7 +1,8 @@
 const { getUser } = require('../controllers/user.controller')
+const { validateJwt } = require('../middlewares/validateJWT')
 
 const userRouter = require('express').Router()
 
-userRouter.get('/', getUser)
+userRouter.get('/', validateJwt ,getUser)
 
 module.exports = userRouter

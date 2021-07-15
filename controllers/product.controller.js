@@ -8,12 +8,12 @@ const getProducts = async (req, res) => {
   try {
     if (req.query.name) {
       const products = await ProductModel.find()
-      const filteredName = products.filter(product   => {
+      const filteredName = products.filter(product => {
         return product.name.toLowerCase().includes(`${req.query.name.toLowerCase()}`)
 
       });
       res.json(filteredName)
-      
+
     } else {
       const getAllProducts = await ProductModel.find();
       res.json(getAllProducts);
@@ -36,12 +36,12 @@ const createProduct = async (req, res = response) => {
 
     req.body.productId = createOwnProduct._id;
     req.body.notes = "";
-    
+
 
     //falta asignarle su groupId
 
     res.json(req.body)
-    
+
   } catch (error) {
     console.log("Error", error);
   }
