@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const getShoppingList = async (req, res ) => {
   try{
     const getList = await GroupModel.findOne().populate('shoppingList.productId')
-    res.json(getList)
+    res.json(getList.shoppingList)
   }catch(error) {
     console.log('Error', error)
   }
@@ -16,7 +16,6 @@ const addProductToList = async (req, res) => {
 
   try {
     const group = await GroupModel.findOne().populate('shoppingList.productId')
-    console.log(group)
     group.shoppingList.push(req.body);
     await group.save();
     await getShoppingList(req, res)
