@@ -15,7 +15,7 @@ const getProducts = async (req, res) => {
       res.status(200).json(filteredName)
 
     } else {
-      const getAllProducts = await ProductModel.find({$or:[{groupId:{$eq:''}}, {groupId:{$eq:req.body.groupId}}]});
+      const getAllProducts = await ProductModel.find({ $or: [{ groupId: { $eq: '' } }, { groupId: { $eq: req.params.groupId } }] });
       res.status(200).json(getAllProducts);
     }
   } catch (error) {

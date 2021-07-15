@@ -6,7 +6,7 @@ const {
 } = require('../controllers/product.controller')
 
 routerProduct 
-.get('/', getProducts)
+.get('/:groupId', getProducts)
 .post('/', createProduct)
 
 
