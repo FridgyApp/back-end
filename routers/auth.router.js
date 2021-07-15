@@ -4,7 +4,7 @@ const { check } = require('express-validator')
 const { isEmail } = require('../database/validators-db')
 const validateBody = require('../middlewares/validateBody')
 
-const { signup, login } = require('../controllers/auth.controller')
+const { signup, login, googleSignIn } = require('../controllers/auth.controller')
 
 AuthRouter.post('/signup',
   [
@@ -23,5 +23,11 @@ AuthRouter.post('/login',
     validateBody
   ] 
 ,login)
+
+AuthRouter.post('/google',
+  [
+    check('id_token', 'El id_token es necesario').not().isEmpty(),
+    validateBody
+  ],googleSignIn);
 
 module.exports = AuthRouter
