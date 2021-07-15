@@ -12,14 +12,15 @@ const getProducts = async (req, res) => {
         return product.name.toLowerCase().includes(`${req.query.name.toLowerCase()}`)
 
       });
-      res.json(filteredName)
+      res.status(200).json(filteredName)
 
     } else {
       const getAllProducts = await ProductModel.find();
-      res.json(getAllProducts);
+      res.status(200).json(getAllProducts);
     }
   } catch (error) {
     console.log("Error", error);
+    res.status(400).json({ message: "Error, cannot find Products" });
   }
 };
 
@@ -36,14 +37,11 @@ const createProduct = async (req, res = response) => {
 
     req.body.productId = createOwnProduct._id;
     req.body.notes = "";
-
-
     //falta asignarle su groupId
-
-    res.json(req.body)
-
+    res.status(200).json(req.body)
   } catch (error) {
     console.log("Error", error);
+    res.status(400).json({ message: "Error, cannot create Product" });
   }
 };
 

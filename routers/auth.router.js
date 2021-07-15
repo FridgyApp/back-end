@@ -1,4 +1,4 @@
-const authRouter = require('express').Router()
+const AuthRouter = require('express').Router()
 const { check } = require('express-validator')
 
 const { isEmail } = require('../database/validators-db')
@@ -6,7 +6,7 @@ const validateBody = require('../middlewares/validateBody')
 
 const { signup, login } = require('../controllers/auth.controller')
 
-authRouter.post('/signup',
+AuthRouter.post('/signup',
   [
     check('name', 'El nombre es obligatorio').not().isEmpty(),
     check('email', 'Tiene que ser un email valido').isEmail(),
@@ -16,7 +16,7 @@ authRouter.post('/signup',
   ]
   , signup)
 
-authRouter.post('/login',
+AuthRouter.post('/login',
   [
     check('email', 'Usuario o contraseña son invalido').isEmail(),
     check('password', 'Usuario o contraseña son invalido').isLength({ min: 6 }),
@@ -24,4 +24,4 @@ authRouter.post('/login',
   ]
   , login)
 
-module.exports = authRouter
+module.exports = AuthRouter

@@ -1,14 +1,14 @@
 const {req , res } = require('express');
 
 const GroupModel = require("../models/group.model");
-const mongoose = require("mongoose");
 
 const getShoppingList = async (req, res ) => {
   try{
     const getList = await GroupModel.findOne().populate('shoppingList.productId')
-    res.json(getList.shoppingList)
+    res.status(200).json(getList.shoppingList)
   }catch(error) {
     console.log('Error', error)
+    res.status(400).json({ message: "Error, cannot find Shopping List" });
   }
 }
 
@@ -21,7 +21,7 @@ const addProductToList = async (req, res) => {
     await getShoppingList(req, res)
   } catch (error) {
     console.log("Error", error);
-    res.status(400).json({ message: "Error, cannot find" });
+    res.status(400).json({ message: "Error, cannot add product to Shopping List" });
   }
 };
 module.exports = {
