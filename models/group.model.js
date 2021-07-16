@@ -4,11 +4,11 @@ const shoppingItemSchema = new mongoose.Schema({
   productId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'product',
-    required : true
+    required: true
   },
   notes: {
     type: String,
-    default: '', 
+    default: ''
   }
 })
 
