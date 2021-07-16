@@ -4,9 +4,12 @@ const shoppingItemSchema = new mongoose.Schema({
   productId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'product',
-    required : true
+    required: true
   },
-  notes: String
+  notes: {
+    type: String,
+    default: ''
+  }
 })
 
 const groupSchema = new mongoose.Schema({
