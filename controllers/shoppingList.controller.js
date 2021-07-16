@@ -27,8 +27,12 @@ const addProductToList = async (req, res) => {
 
 const deleteProductFromList = async (req, res) => {
   try{
-    const getList = await GroupModel.findOne().populate('shoppingList')
-    getList.shoppingList = getList.shoppingList.filter(product => product.productId != req.params.productId)
+    const getList = await GroupModel.findOne().populate('shoppingList.productId')
+    console.log(getList.shoppingList[0].productId._id, 'before filter')
+    console.log(JSON.stringify(getList.shoppingList[0].productId._id), 'before filter')
+
+    getList.shoppingList = getList.shoppingList.filter(product => product.productId._id != req.params.productId)
+
     await getList.save();
     res.status(200).json(getList.shoppingList)
   }catch(error) {
