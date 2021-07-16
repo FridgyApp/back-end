@@ -6,7 +6,10 @@ const shoppingItemSchema = new mongoose.Schema({
     ref: 'product',
     required : true
   },
-  notes: String
+  notes: {
+    type: String,
+    default: '', 
+  }
 })
 
 const groupSchema = new mongoose.Schema({
