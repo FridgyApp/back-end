@@ -13,23 +13,19 @@ const getShoppingList = async (req, res ) => {
 }
 
 const addProductToList = async (req, res) => {
-
   try {
     const group = await GroupModel.findOne().populate('shoppingList.productId')
-    group.shoppingList.push(req.body);
-    await group.save();
-    await getShoppingList(req, res)
+    group.shoppingList.push(req.body)
+    await group.save()
+    res.status(200).json(group.shoppingList)   
   } catch (error) {
-    console.log("Error", error);
-    res.status(400).json({ message: "Error, cannot add product to Shopping List" });
+    res.status(400).json({ message: "Error, cannot add product to Shopping List" })
   }
 };
 
 const deleteProductFromList = async (req, res) => {
   try{
     const getList = await GroupModel.findOne().populate('shoppingList.productId')
-    console.log(getList.shoppingList[0].productId._id, 'before filter')
-    console.log(JSON.stringify(getList.shoppingList[0].productId._id), 'before filter')
 
     getList.shoppingList = getList.shoppingList.filter(product => product.productId._id != req.params.productId)
 

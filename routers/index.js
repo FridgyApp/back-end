@@ -2,16 +2,16 @@ const router = require('express').Router()
 
 const AuthRouter = require('./auth.router')
 const GroupRouter = require('./group.router')
-const routerProduct = require('./product.router')
+const ProductRouter = require('./product.router')
 const ShoppingListRouter = require('./shoppingList.router')
-const userRouter = require('./user.router')
+const UserRouter = require('./user.router')
 const StickyNotesRouter = require('./stickyNote.router')
 
 router
   .use('/auth', AuthRouter)
-  .use('/user', userRouter)
+  .use('/user', UserRouter)
   .use('/group', GroupRouter)
-  .use('/products', routerProduct)
+  .use('/products', ProductRouter)
   .use('/shoppinglist', ShoppingListRouter)
   .use('/stickynotes', StickyNotesRouter)
 

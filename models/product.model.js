@@ -7,8 +7,7 @@ const ProductSchema = new mongoose.Schema({
     default : 'Own Products'
   },
   groupId : {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'groups'
+    type: String,
   }
 })
 

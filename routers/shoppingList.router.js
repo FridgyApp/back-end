@@ -6,9 +6,13 @@ const {
   deleteProductFromList
 } = require('../controllers/shoppingList.controller')
 
+const {
+  validateJwt
+} = require('../middlewares/validateJWT')
+
 ShoppingListRouter
-  .get('/', getShoppingList)
-  .post('/', addProductToList)
-  .delete('/:productId', deleteProductFromList)
+  .get('/', validateJwt, getShoppingList)
+  .post('/', validateJwt, addProductToList)
+  .delete('/:productId', validateJwt, deleteProductFromList)
 
 module.exports = ShoppingListRouter

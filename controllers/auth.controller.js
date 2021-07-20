@@ -24,17 +24,17 @@ const signup = async (req, res = response) => {
 const login = async (req, res = response) => {
   const { email, password } = req.body
   try {
-    const findUser = await UserModel.findOne({ email })
-    if (!findUser) return res.status(400).json({ msg: 'Usuario o contraseña son invalido' })
+    const user = await UserModel.findOne({ email })
+    if (!user) return res.status(400).json({ msg: 'Usuario o contraseña son invalido' })
 
     // Verify password
-    const validatePass = bcrypt.compareSync(password, findUser.password)
+    const validatePass = bcrypt.compareSync(password, user.password)
     if (!validatePass) return res.status(400).json({ msg: 'Usuario o contraseña son invalido' })
 
     // create JWT
-    const token = await createJwt(findUser._id)
+    const token = await createJwt(user._id)
     res.status(200).json({
-      uid: findUser._id,
+      uid: user._id,
       token
     })
   } catch (error) {
@@ -42,6 +42,7 @@ const login = async (req, res = response) => {
   }
 }
 
+//GOOGLE SIGN IN - NOT WORKING - PENDING REVIEW
 const googleSignIn = async(req, res = response) => {
   
   const {id_token} = req.body
@@ -68,15 +69,12 @@ const googleSignIn = async(req, res = response) => {
     // create JWT
     const token = await createJwt(user._id)
     res.status(200).json({
+      msg: 'Todo ok google sign in ! ',
       user,
       token
     })
 
-    res.json({
-      msg: 'Todo ok google sign in ! ',
-      googleUser
-    });
-  }catch (error){
+  } catch (error){
     res.status(400).json({
       msg: 'Token is not valid'
     })

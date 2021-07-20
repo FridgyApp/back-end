@@ -7,11 +7,15 @@ const {
   deleteStickyNote
 } = require('../controllers/stickyNote.controller')
 
+const {
+  validateJwt
+} = require('../middlewares/validateJWT')
+
 StickyNotesRouter
-  .get('/', getStickyNotes)
-  .post('/', createStickyNote)
-  .put('/', updateStickyNote)
-  .delete('/', deleteStickyNote)
+  .get('/', validateJwt, getStickyNotes)
+  .post('/', validateJwt, createStickyNote)
+  .put('/:noteId', validateJwt, updateStickyNote)
+  .delete('/:noteId', validateJwt, deleteStickyNote)
 
 
   module.exports = StickyNotesRouter

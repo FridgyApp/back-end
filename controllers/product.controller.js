@@ -13,18 +13,21 @@ const getProducts = async (req, res) => {
       });
       res.status(200).json(filteredName)
 
-    } else {
-      const getAllProducts = await ProductModel.find({ $or: [{ groupId: { $eq: '' } }, { groupId: { $eq: req.params.groupId } }] });
+    }
+    
+    else {
+      const getAllProducts = await ProductModel.find({ $or: [{ groupId: { $eq: '' } }, { groupId: { $eq: res.locals.user.group } }] });
       res.status(200).json(getAllProducts);
     }
+
   } catch (error) {
-    console.log("Error", error);
     res.status(400).json({ message: "Error, cannot find Products" });
   }
 };
 
 const createProduct = async (req, res = response) => {
   try {
+    req.body.groupId = res.locals.user.group
     const createOwnProduct = await ProductModel.create(req.body);
 
     res.status(200).json(createOwnProduct)

@@ -10,7 +10,7 @@ const {
 } = require('../middlewares/validateJWT')
 
 GroupRouter 
-  .get('/', getGroup)
+  .get('/', validateJwt, getGroup)
   .post('/', validateJwt, createGroup)
 
 module.exports = GroupRouter 

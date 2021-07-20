@@ -10,7 +10,7 @@ const {
 } = require('../middlewares/validateJWT')
 
 routerProduct 
-.get('/:groupId', getProducts)
+.get('/:groupId', validateJwt, getProducts)
 .post('/', validateJwt, createProduct)
 
 
