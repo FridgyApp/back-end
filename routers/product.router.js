@@ -5,9 +5,13 @@ const {
   getProducts
 } = require('../controllers/product.controller')
 
+const {
+  validateJwt
+} = require('../middlewares/validateJWT')
+
 routerProduct 
 .get('/:groupId', getProducts)
-.post('/', createProduct)
+.post('/', validateJwt, createProduct)
 
 
 module.exports = routerProduct 

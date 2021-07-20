@@ -24,15 +24,10 @@ const getProducts = async (req, res) => {
 };
 
 const createProduct = async (req, res = response) => {
-  console.log(req.headers)
   try {
     const createOwnProduct = await ProductModel.create(req.body);
-    createOwnProduct.save();
 
-    req.body.productId = createOwnProduct._id;
-    req.body.notes = "";
-    //falta asignarle su groupId
-    res.status(200).json(req.body)
+    res.status(200).json(createOwnProduct)
   } catch (error) {
     console.log("Error", error);
     res.status(400).json({ message: "Error, cannot create Product" });

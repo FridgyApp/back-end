@@ -5,9 +5,12 @@ createGroup,
 getGroup
 } = require('../controllers/group.controller')
 
+const {
+  validateJwt
+} = require('../middlewares/validateJWT')
 
 GroupRouter 
   .get('/', getGroup)
-  .post('/', createGroup)
+  .post('/', validateJwt, createGroup)
 
 module.exports = GroupRouter 

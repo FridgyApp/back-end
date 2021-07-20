@@ -13,6 +13,8 @@ const getGroup = async (req, res ) => {
 }
 
 const createGroup = async (req, res) => {
+  req.body.members.push(res.locals.user._id)
+  console.log(req.body)
   try {
     const createGroup = await GroupModel.create(req.body);
     await createGroup.save();

@@ -51,7 +51,7 @@ const googleSignIn = async(req, res = response) => {
 
     let user = await UserModel.findOne({ email });
 
-    if( !user) {
+    if(!user) {
       //create user
       const data = {
         name, 
@@ -61,7 +61,7 @@ const googleSignIn = async(req, res = response) => {
         google: true
       };
 
-      user = new UserModel (data);
+      user = new UserModel(data);
       await user.save();
     }
 
@@ -71,7 +71,6 @@ const googleSignIn = async(req, res = response) => {
       user,
       token
     })
-
 
     res.json({
       msg: 'Todo ok google sign in ! ',

@@ -6,7 +6,10 @@ const ProductSchema = new mongoose.Schema({
     type: String,
     default : 'Own Products'
   },
-  groupId : String
+  groupId : {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'groups'
+  }
 })
 
 module.exports = mongoose.model('product', ProductSchema)
