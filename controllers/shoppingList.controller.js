@@ -4,7 +4,7 @@ const GroupModel = require("../models/group.model");
 
 const getShoppingList = async (req, res ) => {
   try{
-    const getList = await GroupModel.findOne().populate('shoppingList.productId')
+    const getList = await GroupModel.findOne(res.locals.user.group).populate('shoppingList.productId')
     res.status(200).json(getList.shoppingList)
   }catch(error) {
     console.log('Error', error)
@@ -14,7 +14,7 @@ const getShoppingList = async (req, res ) => {
 
 const addProductToList = async (req, res) => {
   try {
-    const group = await GroupModel.findOne().populate('shoppingList.productId')
+    const group = await GroupModel.findOne(res.locals.user.group).populate('shoppingList.productId')
     group.shoppingList.push(req.body)
     await group.save()
     res.status(200).json(group.shoppingList)   
@@ -25,7 +25,7 @@ const addProductToList = async (req, res) => {
 
 const deleteProductFromList = async (req, res) => {
   try{
-    const getList = await GroupModel.findOne().populate('shoppingList.productId')
+    const getList = await GroupModel.findOne(res.locals.user.group).populate('shoppingList.productId')
 
     getList.shoppingList = getList.shoppingList.filter(product => product.productId._id != req.params.productId)
 

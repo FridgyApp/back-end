@@ -34,7 +34,7 @@ const login = async (req, res = response) => {
     // create JWT
     const token = await createJwt(user._id)
     res.status(200).json({
-      uid: user._id,
+      user,
       token
     })
   } catch (error) {
