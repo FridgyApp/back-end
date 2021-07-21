@@ -1,7 +1,10 @@
 const EventRouter = require('express').Router()
 
 const {
-  createEvent
+  createEvent,
+  updateEvent,
+  deleteEvent,
+  getEvents
 } = require('../controllers/event.controller')
 
 const {
@@ -9,9 +12,9 @@ const {
 } = require('../middlewares/validateJWT')
 
 EventRouter
-  // .get('/', validateJwt, getStickyNotes)
+  .get('/', validateJwt, getEvents)
   .post('/', validateJwt, createEvent)
-  // .put('/:noteId', validateJwt, updateStickyNote)
-  // .delete('/:noteId', validateJwt, deleteStickyNote)
+  .put('/:eventId', validateJwt, updateEvent)
+  .delete('/:eventId', validateJwt, deleteEvent)
 
 module.exports = EventRouter
