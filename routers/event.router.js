@@ -11,9 +11,13 @@ const {
   validateJwt
 } = require('../middlewares/validateJWT')
 
+const {
+  userHasGroup
+} = require('../middlewares/userHasGroup')
+
 EventRouter
   .get('/', validateJwt, getEvents)
-  .post('/', validateJwt, createEvent)
+  .post('/', validateJwt, userHasGroup, createEvent)
   .put('/:eventId', validateJwt, updateEvent)
   .delete('/:eventId', validateJwt, deleteEvent)
 

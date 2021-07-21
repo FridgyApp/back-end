@@ -14,8 +14,15 @@ const EventSchema = new mongoose.Schema({
     type: Date,
     required: true
   },
-  allDay: Boolean,
-  default: false
+  timed: {
+    type: Boolean,
+    default: false
+  },
+  color: {
+    type: String, 
+    required: true,
+    default: 'blue'
+  }
 })
 
 const eventModel = mongoose.model('events', EventSchema)
