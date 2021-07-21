@@ -25,12 +25,18 @@ const createEvent = async (req, res) => {
   }
 }
 
+
 const updateEvent = async (req, res) => {
   try {
     const group = await GroupModel.findOne(res.locals.user.group)
+    console.log('holaaaaa', group)
     const event = group.events.id(req.params.eventId)
-    event.name = req.body.name
-    event.description = req.body.description
+    console.log(event)
+    event.name = req.body.name || event.name
+    event.description = req.body.description || event.description
+    event.start = req.body.start || event.start
+    event.end = req.body.end || event.end
+    event.allDay = req.body.allDay || event.allDay
 
     await group.save()
     res.status(200).json(group.events.id(req.params.eventId))
