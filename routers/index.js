@@ -6,6 +6,7 @@ const ProductRouter = require('./product.router')
 const ShoppingListRouter = require('./shoppingList.router')
 const UserRouter = require('./user.router')
 const StickyNotesRouter = require('./stickyNote.router')
+const EventRouter = require('./event.router')
 
 router
   .use('/auth', AuthRouter)
@@ -14,5 +15,6 @@ router
   .use('/products', ProductRouter)
   .use('/shoppinglist', ShoppingListRouter)
   .use('/stickynotes', StickyNotesRouter)
+  .use('/events', EventRouter)
 
 module.exports = router

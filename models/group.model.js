@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 
+const EventSchema = require('./event.model').schema
+
 const ShoppingItemSchema = new mongoose.Schema({
   productId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -13,21 +15,23 @@ const ShoppingItemSchema = new mongoose.Schema({
 })
 
 const StickyNoteSchema = new mongoose.Schema({
-  name : String, 
+  name: String,
   description: String,
 })
 
-const groupSchema = new mongoose.Schema({
+const GroupSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
   },
   members: [{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'users'
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'users'
   }],
   shoppingList: [ShoppingItemSchema],
-  stickyNotes: [StickyNoteSchema]
+  stickyNotes: [StickyNoteSchema],
+  events: [EventSchema]
+
 })
 
-module.exports = mongoose.model('groups', groupSchema)
+module.exports = mongoose.model('groups', GroupSchema)

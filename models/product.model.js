@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 
 const ProductSchema = new mongoose.Schema({
   name: String,
-  category : {
+  category: {
     type: String,
-    default : 'Own Products'
+    default: 'Own Products'
   },
-  groupId : {
+  groupId: {
     type: String,
   }
 })

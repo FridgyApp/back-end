@@ -3,7 +3,7 @@ const GroupModel = require('../models/group.model')
 
 const getStickyNotes = async (req, res ) => {
   try{
-    const group = await GroupModel.findById(res.locals.user.group)
+    const group = await GroupModel.findOne(res.locals.user.group)
     res.status(200).json(group.stickyNotes)
   }catch (error) {
     res.status(400).json({ message: "Error, cannot find Stickynote" });
@@ -12,7 +12,9 @@ const getStickyNotes = async (req, res ) => {
 
 const createStickyNote = async (req, res) => {
   try{
-    const group = await GroupModel.findById(res.locals.user.group)
+    console.log(res.locals.user)
+    const group = await GroupModel.findOne(res.locals.user.group)
+    console.log(group)
     group.stickyNotes.push(req.body)
     await group.save()
     res.status(200).json(group.stickyNotes.pop())
@@ -23,7 +25,7 @@ const createStickyNote = async (req, res) => {
 
 const updateStickyNote = async (req, res) => {
   try{
-    const group = await GroupModel.findById(res.locals.user.group)
+    const group = await GroupModel.findOne(res.locals.user.group)
     const note = group.stickyNotes.id(req.params.noteId)
     note.name = req.body.name
     note.description = req.body.description
@@ -38,7 +40,7 @@ const updateStickyNote = async (req, res) => {
 
 const deleteStickyNote = async (req, res) => {
   try{
-    const group = await GroupModel.findById(res.locals.user.group)
+    const group = await GroupModel.findOne(res.locals.user.group)
     group.stickyNotes.remove(req.params.noteId)
     group.save()
 
