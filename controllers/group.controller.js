@@ -7,6 +7,7 @@ const { auth } = require('google-auth-library')
 
 // GET GROUP - PENDING REVIEW - KEEP IF USER CAN HAVE MULTIPLE GROUPS
 const getGroup = async (req, res) => {
+  if(!res.locals.user.group || res.locals.user.group ==='') return res.status(200).json({ message: "no tiene" });
   try {
     const getGroup = await GroupModel.findById(res.locals.user.group)
     res.status(200).json(getGroup)
@@ -31,12 +32,15 @@ const createGroup = async (req, res) => {
 }
 
 const addUserGroup = async (req, res) => {
+  console.log(req.body)
   try {
     const user = await AuthModel.findOne({ email: req.body.email })
-    if (!user.group || user.group === null) {
-      res.status(400).json({ message: 'Error, user is already in a group' })
+    console.log(user)
+    if (user.group && user.group !== '') {
+      return res.status(400).json({ message: 'Error, user is already in a group' })
     }
     const group = await GroupModel.findOne({ _id: res.locals.user.group })
+    console.log('tercero')
     group.members.push(user._id)
     user.group = res.locals.user.group
     await user.save()
