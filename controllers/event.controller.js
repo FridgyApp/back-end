@@ -6,6 +6,7 @@ const EventModel = require('../models/event.model')
 // create event
 
 const getEvents = async (req, res) => {
+  if (!res.locals.user.group) return res.status(200).json({message:'hola mundo' })
   try {
     const group = await GroupModel.findOne(res.locals.user.group)
     res.status(200).json(group.events)
@@ -24,7 +25,6 @@ const createEvent = async (req, res) => {
     res.status(400).json({ message: 'Error, cannot create Event' })
   }
 }
-
 
 const updateEvent = async (req, res) => {
   try {

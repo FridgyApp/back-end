@@ -1,15 +1,14 @@
-const { req, res } = require('express')
+
 
 const GroupModel = require('../models/group.model')
 const AuthModel = require('../models/auth.model')
-
-const { auth } = require('google-auth-library')
+const ProductModel = require("../models/product.model")
 
 // GET GROUP - PENDING REVIEW - KEEP IF USER CAN HAVE MULTIPLE GROUPS
 const getGroup = async (req, res) => {
-  if(!res.locals.user.group || res.locals.user.group ==='') return res.status(200).json({ message: "no tiene" });
+  if (!res.locals.user.group || res.locals.user.group === '') return res.status(200).json({ message: 'no tiene' })
   try {
-    const getGroup = await GroupModel.findById(res.locals.user.group)
+    const getGroup = await GroupModel.findById(res.locals.user.group).populate('members').populate('shoppingList.productId')
     res.status(200).json(getGroup)
   } catch (error) {
     console.log('Error', error)
@@ -24,7 +23,8 @@ const createGroup = async (req, res) => {
     await group.save()
     res.locals.user.group = group.id
     res.locals.user.save()
-    res.status(200).json(group)
+    console.log(res.locals.user)
+    res.status(200).json(res.locals.user)
   } catch (error) {
     console.log('Error', error)
     res.status(400).json({ message: 'Error, cannot create Group' })
@@ -32,7 +32,6 @@ const createGroup = async (req, res) => {
 }
 
 const addUserGroup = async (req, res) => {
-  console.log(req.body)
   try {
     const user = await AuthModel.findOne({ email: req.body.email })
     console.log(user)
