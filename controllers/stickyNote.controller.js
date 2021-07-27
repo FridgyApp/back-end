@@ -25,8 +25,8 @@ const updateStickyNote = async (req, res) => {
   try{
     const group = await GroupModel.findOne({_id:res.locals.user.group})
     const note = group.stickyNotes.id(req.params.noteId)
-    note.name = req.body.name
-    note.description = req.body.description
+    note.name = req.body.note.name
+    note.description = req.body.note.description
     
     await group.save()
     res.status(200).json(group.stickyNotes.id(req.params.noteId))
