@@ -2,6 +2,7 @@ const {req , res} = require('express');
 const GroupModel = require('../models/group.model')
 
 const getStickyNotes = async (req, res ) => {
+  if(!res.locals.user.group || res.locals.user.group ==='') return res.status(200).json({ message: "no tiene" });
   try{
     const group = await GroupModel.findOne({_id:res.locals.user.group})
     res.status(200).json(group.stickyNotes)

@@ -1,7 +1,7 @@
-const { request, response } = require("express");
-const mongoose = require("mongoose");
+const { request, response } = require("express")
+const mongoose = require("mongoose")
 
-const ProductModel = require("../models/product.model");
+const ProductModel = require("../models/product.model")
 
 const getProducts = async (req, res) => {
   try {
