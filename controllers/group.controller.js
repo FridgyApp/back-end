@@ -23,7 +23,6 @@ const createGroup = async (req, res) => {
     await group.save()
     res.locals.user.group = group.id
     res.locals.user.save()
-    console.log(res.locals.user)
     res.status(200).json(res.locals.user)
   } catch (error) {
     console.log('Error', error)
@@ -34,17 +33,15 @@ const createGroup = async (req, res) => {
 const addUserGroup = async (req, res) => {
   try {
     const user = await AuthModel.findOne({ email: req.body.email })
-    console.log(user)
     if (user.group && user.group !== '') {
       return res.status(400).json({ message: 'Error, user is already in a group' })
     }
     const group = await GroupModel.findOne({ _id: res.locals.user.group })
-    console.log('tercero')
     group.members.push(user._id)
     user.group = res.locals.user.group
     await user.save()
     await group.save()
-    res.status(200).json(group)
+    res.status(200).json(user)
   } catch (error) {
     res.status(400).json({ message: 'Error, cannot add member to group' })
   }
