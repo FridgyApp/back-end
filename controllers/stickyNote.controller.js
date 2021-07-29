@@ -32,7 +32,6 @@ const updateStickyNote = async (req, res) => {
     await group.save()
     res.status(200).json(group.stickyNotes.id(req.params.noteId))
   }catch(error) {
-    console.log('Error', error)
     res.status(400).json({message: "Error, cannot update"})
   }
 }

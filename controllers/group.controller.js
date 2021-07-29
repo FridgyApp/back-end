@@ -11,7 +11,6 @@ const getGroup = async (req, res) => {
     const getGroup = await GroupModel.findById(res.locals.user.group).populate('members').populate('shoppingList.productId')
     res.status(200).json(getGroup)
   } catch (error) {
-    console.log('Error', error)
     res.status(400).json({ message: 'Error, cannot find Group' })
   }
 }
@@ -25,7 +24,6 @@ const createGroup = async (req, res) => {
     res.locals.user.save()
     res.status(200).json(res.locals.user)
   } catch (error) {
-    console.log('Error', error)
     res.status(400).json({ message: 'Error, cannot create Group' })
   }
 }

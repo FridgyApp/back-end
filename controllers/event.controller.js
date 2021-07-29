@@ -29,9 +29,9 @@ const createEvent = async (req, res) => {
 const updateEvent = async (req, res) => {
   try {
     const group = await GroupModel.findOne(res.locals.user.group)
-    console.log('holaaaaa', group)
+
     const event = group.events.id(req.params.eventId)
-    console.log(event)
+
     event.name = req.body.name || event.name
     event.description = req.body.description || event.description
     event.start = req.body.start || event.start
@@ -41,7 +41,6 @@ const updateEvent = async (req, res) => {
     await group.save()
     res.status(200).json(group.events.id(req.params.eventId))
   } catch (error) {
-    console.log('Error', error)
     res.status(400).json({ message: 'Error, cannot update' })
   }
 }

@@ -33,7 +33,6 @@ const login = async (req, res = response) => {
 
     // create JWT
     const token = await createJwt(user._id)
-    console.log('hola')
     res.status(200).json({
       user,
       token
