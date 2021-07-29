@@ -1,4 +1,4 @@
-<p align="center"><img src="https://user-images.githubusercontent.com/83118705/124954477-0603ac00-e00e-11eb-9995-b38dcd9116dc.png")</p>
+<p align="center"><img src="https://user-images.githubusercontent.com/83118705/127475751-4424fca7-76f4-421d-873b-1ec92927f258.png")</p>
 
 
 Fridgy App is an API that serves as a time-management application. 
